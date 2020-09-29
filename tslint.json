@@ -145,8 +145,8 @@
     "component-selector": [
       true,
       "element",
-      "app",
-      "kebab-case"
+      "",
+      ""
     ]
   }
 }
