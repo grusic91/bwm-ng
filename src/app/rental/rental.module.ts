@@ -1,10 +1,16 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule, Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
+
+import { RentalService } from './shared/rental.service';
+import { FirstUpperLetterPipe, UppercasePipe } from '../shared/pipes/uppercase.pipe';
+import { BwmNgIfDirective, HighlightDirective, BwmNgForDirective } from '../shared/directives/custom.directive';
 
 import { RentalDetailComponent } from './rental-detail/rental-detail.component';
 import { RentalListingComponent } from './rental-listing/rental-listing.component';
 import { RentalComponent } from './rental.component';
+import { RentalCardComponent } from '../shared/rental-card/rental-card.component';
 
 const routes: Routes = [
     {
@@ -21,13 +27,21 @@ const routes: Routes = [
   declarations: [
     RentalComponent,
     RentalDetailComponent,
-    RentalListingComponent
+    RentalListingComponent,
+    RentalCardComponent,
+    UppercasePipe,
+    FirstUpperLetterPipe,
+    HighlightDirective,
+    BwmNgIfDirective,
+    BwmNgForDirective
   ],
   imports: [
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    CommonModule
   ],
-  providers: [],
+  providers: [
+    RentalService
+  ],
   bootstrap: [RentalComponent]
 })
-export class RentalModule {
-}
+export class RentalModule { }
