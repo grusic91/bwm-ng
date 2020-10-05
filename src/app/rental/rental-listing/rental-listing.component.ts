@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Rental } from '../shared/rental.model';
+import { RentalService } from '../shared/rental.service';
 
 @Component({
     selector: 'rental-listing',
@@ -6,6 +8,15 @@ import { Component } from '@angular/core';
     styleUrls: ['./rental-listing.component.scss']
 })
 
-export class RentalListingComponent {
-    listing = 'Rental Listing Component!';
+export class RentalListingComponent implements OnInit {
+    rentals: Rental[] = [];
+
+    constructor(private rentalService: RentalService) {}
+
+    ngOnInit(): any {
+        this.rentalService.getRentals()
+            .subscribe((rentals: Rental[]) => {
+                this.rentals = rentals;
+        });
+    }
 }

@@ -8,3 +8,24 @@ html, body {
 html, body, p {
     color: $dark-gray-color;
 }
+
+.bwm-list-page {
+    .title {
+        font-size: 30px;
+        font-weight: bold;
+        margin: 20px;
+    }
+}
+
+.type {
+    &-apartment {
+        color: #a72de3;
+    }
+
+    &-condo {
+        color: #d68000;
+    }
+    &-house {
+        color: #bf1818;
+    }
+}
