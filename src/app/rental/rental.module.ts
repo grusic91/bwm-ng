@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http'
 
 import { RentalService } from './shared/rental.service';
 import { FirstUpperLetterPipe, UppercasePipe } from '../shared/pipes/uppercase.pipe';
@@ -37,7 +38,8 @@ const routes: Routes = [
   ],
   imports: [
     RouterModule.forChild(routes),
-    CommonModule
+    CommonModule,
+    HttpClientModule
   ],
   providers: [
     RentalService
