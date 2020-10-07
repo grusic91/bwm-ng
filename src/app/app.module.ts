@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { RentalModule } from './rental/rental.module';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -18,6 +19,7 @@ import { RegisterComponent } from './auth/register/register.component';
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     AppRoutingModule,
     RentalModule
   ],
