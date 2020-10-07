@@ -10,11 +10,11 @@ export class RentalService {
 
     // Get rental by id from server
     getRentalById(id: string): Observable<Rental> {
-        return this.http.get<Rental>(`http://localhost:4200/api/rentals/${id}`);
+        return this.http.get<Rental>(`/api/rentals/${id}`);
     }
 
     // generic type Observable
     getRentals(): Observable<Rental[]> {
-        return this.http.get<Rental[]>(`http://localhost:4200/api/rentals`);
+        return this.http.get<Rental[]>(`/api/rentals`);
     }    
 }
