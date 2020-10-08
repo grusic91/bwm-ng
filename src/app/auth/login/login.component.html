@@ -1,34 +1,58 @@
 <section id="login">
     <div class="bwm-form">
-      <div class="row">
-        <div class="col-md-5">
-          <h1>Login</h1>
+        <div class="row">
+            <div class="col-md-5">
+                <h1>Login</h1>
           <!-- <div *ngIf="notifyMessage" class="alert alert-success">
             Some message
           </div> -->
-          <form>
+        <form [formGroup]="loginForm">
             <div class="form-group">
-              <label for="email">Email</label>
-              <input type="email"
-                     class="form-control"
-                     id="email">
-              <!-- <div class="alert alert-danger">
-                <div>
-                  Email is required.
+                <label for="email">Email</label>
+                <input 
+                    formControlName="email"
+                    type="email"
+                    class="form-control"
+                    id="email">
+                <div
+                    *ngIf="email.invalid && !email.pristine" 
+                    class="alert alert-danger">
+                    <div *ngIf="email.errors.required">
+                        Email is required.
+                    </div>
+                    <div *ngIf="email.errors.forbiddenEmail">
+                        This Email is not allowed!
+                    </div>
+                    <div *ngIf="email.errors.pattern">
+                        Must be valid email format!
+                    </div>
                 </div>
-                <div>
-                  Must be valid email format!
-                </div>
-              </div> -->
             </div>
             <div class="form-group">
-              <label for="password">Password</label>
-              <input type="password"
-                     class="form-control"
-                     id="password">
+                <label for="password">Password</label>
+                <input 
+                    formControlName="password"
+                    type="password"
+                    class="form-control"
+                    id="password">
+                <div
+                    *ngIf="password.invalid && !password.pristine" 
+                    class="alert alert-danger">
+                    <div *ngIf="password.errors.required">
+                        Password is required.
+                    </div>
+                    <div *ngIf="password.errors.minlength">
+                        Password is to short! Min length is 6.
+                    </div>
+                </div>
             </div>
-            <button type="submit" class="btn bwm-btn-main">Submit</button>
+            <button 
+                (click)="login()"
+                [disabled]="loginForm.invalid"
+                type="submit" 
+                class="btn bwm-btn-main">Submit</button>
           </form>
+          
           <!-- <div *ngIf="errors.length > 0" class="alert alert-danger">
             <p *ngFor="let error of errors">
               {{error.detail}}

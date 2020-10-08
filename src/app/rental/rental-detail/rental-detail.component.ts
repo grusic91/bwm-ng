@@ -13,7 +13,7 @@ export class RentalDetailComponent implements OnInit {
     rental: Rental;
     // dependecy injection
     constructor(
-        private route: ActivatedRoute, 
+        private route: ActivatedRoute,
         private rentalService: RentalService){}
 
     ngOnInit(): any {
@@ -23,9 +23,7 @@ export class RentalDetailComponent implements OnInit {
             this.rentalService.getRentalById(rentalId)
             .subscribe(rental => {
                 this.rental = rental;
-            })  
+            });
         });
-
-              
     }
 }

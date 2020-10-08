@@ -1,8 +1,8 @@
-import { 
-    ElementRef, 
+import {
+    ElementRef,
     ViewContainerRef,
     TemplateRef,
-    Directive, 
+    Directive,
     Input,
     OnChanges
 } from '@angular/core';
@@ -22,7 +22,7 @@ export class HighlightDirective {
 })
 
 export class BwmNgIfDirective {
-    @Input('bwmNgIf') bwmNgIf;
+    @Input('bwmNgIf')bwmNgIf;
     constructor(private container: ViewContainerRef, private template: TemplateRef<any>) {}
 }
 
@@ -34,14 +34,12 @@ export class BwmNgIfDirective {
 export class BwmNgForDirective implements OnChanges {
     @Input('bwmNgForOf') bwmNgForOf: Array<any>;
     constructor(
-        private container: ViewContainerRef, 
+        private container: ViewContainerRef,
         private template: TemplateRef<any>) {}
-
     
-    ngOnChanges() {
+    ngOnChanges(): any {
         this.bwmNgForOf.forEach(value => {
             this.container.createEmbeddedView(this.template, {$implicit: value});
-        })
+        });
     }
-
 }

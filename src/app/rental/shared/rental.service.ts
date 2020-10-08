@@ -3,10 +3,11 @@ import { HttpClient} from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Rental } from './rental.model';
 
-
-@Injectable()
+@Injectable({
+    providedIn: 'root'
+})
 export class RentalService {
-    constructor(private http: HttpClient) {} 
+    constructor(private http: HttpClient) {}
 
     // Get rental by id from server
     getRentalById(id: string): Observable<Rental> {
@@ -16,5 +17,5 @@ export class RentalService {
     // generic type Observable
     getRentals(): Observable<Rental[]> {
         return this.http.get<Rental[]>(`/api/rentals`);
-    }    
+    }
 }

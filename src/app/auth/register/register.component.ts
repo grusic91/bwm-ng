@@ -18,23 +18,16 @@ export class RegisterComponent implements OnInit {
     this.registerFormData = new RegisterForm();
   }
 
-  register(form: NgForm) {
+  register(form: NgForm): any {
     this.validateInputs(form);
 
-    if (form.invalid) { return }
-
-    alert(this.diagnostic)
+    if (form.invalid) { return; }
   }
 
-  validateInputs(form: NgForm) {
+  validateInputs(form: NgForm): any {
     // get array of keys
     Object.keys(form.controls).forEach(controlName => {
       form.controls[controlName].markAsDirty();
-    })
+    });
   }
-
-  get diagnostic(): string {
-    return JSON.stringify(this.registerFormData);
-  }
-
 }
