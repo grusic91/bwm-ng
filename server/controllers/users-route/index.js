@@ -32,15 +32,17 @@ exports.registerUser = (req, res) => {
         if (error) { return res.mongoError(error); }
 
         if (existingUser) {
-            res.sendApiError({
+            return res.sendApiError({
                 title: 'Invalid Email', 
                 detail: 'User with provided Email Already exist!'
             });
         }
 
         const user = new User({username, email, password});
-        user.save((err) => {
-            if (err) { return res.mongoError(err); }
+        user.save((error) => {
+            if (error) {
+              return res.mongoError(error);
+            }
             return res.json({status: 'registered!'});
         });
     });
@@ -114,8 +116,7 @@ function pareseToken(token) {
     }
     catch (error) {
         return null
-    }
-   
+    }   
 }
 
 function notAuthorized(res) {
