@@ -26,7 +26,6 @@ export class BwmNgIfDirective {
     constructor(private container: ViewContainerRef, private template: TemplateRef<any>) {}
 }
 
-
 @Directive({
     selector: '[bwmNgFor]'
 })
