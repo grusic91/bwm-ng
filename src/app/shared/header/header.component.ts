@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
     selector: 'header-component',
@@ -7,5 +7,7 @@ import { Component } from '@angular/core';
 })
 
 export class HeaderComponent {
-    public customNumber = 12;
+    @Input('isAuthenticated') isAuthenticated = false;
+    @Input('username') username = '';
+    @Input('logout') logout = () => {};
 }

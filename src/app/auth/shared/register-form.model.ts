@@ -4,3 +4,8 @@ export class RegisterForm {
     password: string;
     passwordConfirmation: string;
 }
+
+export class LoginForm {
+    email: string;
+    password: string
+}
