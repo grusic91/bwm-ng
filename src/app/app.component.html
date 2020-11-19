@@ -1,4 +1,9 @@
-<header-component></header-component>
+<header-component
+    [isAuthenticated]="auth.isAuthenticated"
+    [username]="auth.username"
+    [logout]="auth.logout"
+>
+</header-component>
 <div class="container pt-5">
     <router-outlet></router-outlet>
 </div>

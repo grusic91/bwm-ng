@@ -7,6 +7,7 @@ import {
 } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { forbiddenEmailValidator } from '../../shared/validators/functions';
+import { AuthService } from '../shared/auth.service';
 
 @Component({
     selector: 'app-login',
@@ -18,11 +19,13 @@ export class LoginComponent implements OnInit, OnDestroy {
     messageTimeout: any;
     loginForm: FormGroup;
     emailIdPattern = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    errors: BwmApi.Error[] = [];
 
     constructor(
         private fb: FormBuilder,
         private route: ActivatedRoute,
-        private router: Router
+        private router: Router,
+        private auth: AuthService
         ) { }
 
     ngOnInit(): void {
@@ -30,11 +33,30 @@ export class LoginComponent implements OnInit, OnDestroy {
         this.checkLoginMessage();
     }
 
+    login(): any {
+        if (this.loginForm.invalid) { return; }
+        
+        this.errors = [];
+        return this.auth
+            .login(this.loginForm.value)
+            .subscribe((_: string) => {
+                if(this.auth.redirectUrl){
+                    this.router.navigate([this.auth.redirectUrl]);
+                    this.auth.redirectUrl = null;
+                } else {
+                    this.router.navigate(['/rentals']);
+                }                
+            }, (errors: BwmApi.Error[]) => {
+                this.errors = errors;
+            }
+        );
+    }
+
     checkLoginMessage(): void {
         this.route.queryParams.subscribe(params => {
             this.message = params.message ? params.message : null ;
 
-            this.messageTimeout = setTimeout(() => {
+            this.messageTimeout = window.setTimeout(() => {
                 this.router.navigate([], {
                     replaceUrl: true,
                     queryParams: { message: null },
@@ -46,7 +68,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy(): void {
-        this.messageTimeout && clearTimeout(this.messageTimeout);
+        this.messageTimeout && window.clearTimeout(this.messageTimeout);
     }
     
     initForm(): any {
@@ -60,10 +82,7 @@ export class LoginComponent implements OnInit, OnDestroy {
         });
     }
 
-    login(): any {
-        if (this.loginForm.invalid) { return; }
-        alert(this.diagnostic);
-    }
+    
 
     get email(): AbstractControl { return this.loginForm.get('email'); }
 
